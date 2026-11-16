@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="description" content="SmartEdu — AI-Powered Smart Learning and Coding Platform with Syllabus Progress, Multi-Language Code Execution, and Regression Analytics.">
+  <title>SmartEdu — AI Smart Learning & Coding Platform</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Chart.js CDN for Real Statistical Regression & Performance Visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+      <div class="top-nav-left">
+        <button class="mobile-menu-btn" id="btn-mobile-toggle" aria-label="Toggle Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="top-brand">
+          <span class="brand-badge-icon">🎓</span>
+          <span class="brand-name">SmartEdu</span>
+          <span class="brand-tag">AI LEARNING & CODING PLATFORM</span>
+        </div>
+      </div>
+
+      <div class="top-nav-right">
+        <!-- Live System Status Badge -->
+        <div class="status-indicator-pill" id="system-status-pill" title="Live System Telemetry">
+          <span class="pulse-dot"></span>
+          <span id="system-status-text">System Online</span>
+        </div>
+
+        <!-- In-App Notification Bell -->
+        <div class="notification-wrapper">
+          <button class="icon-btn" id="btn-notifications" aria-label="Notifications" title="Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="notification-badge" id="notif-badge">0</span>
+          </button>
+          <div class="notification-dropdown" id="notification-dropdown">
+            <div class="dropdown-header">
+              <span class="dropdown-title">Course Notifications</span>
+              <button class="text-btn" id="btn-mark-all-read">Mark all read</button>
+            </div>
+            <div class="notification-list" id="notification-list">
+              <div class="empty-notif">No new notifications</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Profile Pill -->
+        <div class="user-profile-pill" id="user-profile-pill">
+          <div class="user-avatar" id="nav-user-avatar">?</div>
+          <div class="user-meta">
+            <span class="user-name" id="nav-user-name">Guest User</span>
+            <span class="user-role-badge" id="nav-user-role">Not Logged In</span>
+          </div>
+          <button class="logout-btn" id="btn-auth-action" title="Login or Switch Account">Login</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-body-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" id="sidebar" aria-label="Main Navigation">
+        <!-- Navigation Section: Student / General Portal -->
+        <div class="nav-section-label" id="sidebar-role-label">STUDENT PORTAL</div>
+        <nav class="nav-menu" id="nav-menu-primary">
+          <!-- Student Links -->
+          <button class="nav-item active" data-view="dashboard" id="nav-dashboard">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+            <span>Student Dashboard</span>
+          </button>
+          <button class="nav-item" data-view="syllabus" id="nav-syllabus">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span>Syllabus & Learning</span>
+          </button>
+          <button class="nav-item" data-view="coding" id="nav-coding">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <span>Coding Platform</span>
+          </button>
+          <button class="nav-item" data-view="ai-tutor" id="nav-ai-tutor">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>AI Learning Assistant</span>
+          </button>
+          <button class="nav-item" data-view="quizzes" id="nav-quizzes">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span>Quizzes & Tests</span>
+          </button>
+          <button class="nav-item" data-view="assignments" id="nav-assignments">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>Assignments</span>
+          </button>
+          <button class="nav-item" data-view="analytics" id="nav-analytics">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span>Performance & Regression</span>
+          </button>
+
+          <!-- Teacher Specific Links (Rendered dynamically based on role) -->
+          <div class="teacher-only-nav hidden" id="teacher-nav-group">
+            <div class="nav-divider"></div>
+            <div class="nav-section-label">FACULTY TOOLS</div>
+            <button class="nav-item" data-view="teacher-dashboard" id="nav-teacher-dashboard">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Faculty Telemetry</span>
+            </button>
+            <button class="nav-item" data-view="syllabus-builder" id="nav-syllabus-builder">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              <span>Manage Syllabus</span>
+            </button>
+          </div>
+
+          <!-- Developer Tools Section (Copilot Suite) -->
+          <div class="nav-divider"></div>
+          <div class="nav-section-label">ENGINEERING SUITE</div>
+          <button class="nav-item" data-view="generator" id="nav-generator">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <span>Code Generator</span>
+          </button>
+          <button class="nav-item" data-view="testing" id="nav-testing">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span>Automated Testing</span>
+          </button>
+          <button class="nav-item" data-view="review" id="nav-review">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <span>Code Reviewer</span>
+          </button>
+          <button class="nav-item" data-view="github" id="nav-github">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.69c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.7.115 2.5.336 1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>
+            <span>GitHub Assistant</span>
+          </button>
+          <button class="nav-item" data-view="history" id="nav-history">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Audit History</span>
+          </button>
+        </nav>
+
+        <!-- Sidebar Environment Card -->
+        <div class="sidebar-footer">
+          <div class="env-card">
+            <div class="env-row">
+              <span class="env-label">AI Engine:</span>
+              <span class="env-val" id="env-ai-status">Checking...</span>
+            </div>
+            <div class="env-row">
+              <span class="env-label">Compiler:</span>
+              <span class="env-val" id="env-compiler-status">Judge0 Ready</span>
+            </div>
+            <div class="env-row">
+              <span class="env-label">Database:</span>
+              <span class="env-val" id="env-db-status">SQLite (WAL)</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Workspace Viewport -->
+      <main class="content-viewport" id="content-viewport">
+        <!-- Toast Notification Container -->
+        <div class="toast-container" id="toast-container"></div>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: AUTHENTICATION / LOGIN / REGISTER                        -->
+        <!-- ============================================================== -->
+        <section class="view-panel hidden" id="view-auth">
+          <div class="auth-card-container">
+            <div class="auth-card">
+              <div class="auth-header">
+                <span class="auth-logo-badge">🎓</span>
+                <h1 class="auth-title">Welcome to SmartEdu</h1>
+                <p class="auth-subtitle">AI-Powered Educational Platform with Real Code Execution</p>
+              </div>
+
+              <!-- Quick Login Bar for Evaluators -->
+              <div class="quick-demo-bar">
+                <div class="quick-demo-label">1-Click Fast Login for Testing:</div>
+                <div class="quick-demo-buttons">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btn-quick-student">Student (Alex)</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btn-quick-teacher">Teacher (Prof. Sharma)</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btn-quick-admin">Administrator</button>
+                </div>
+              </div>
+
+              <!-- Tab switcher -->
+              <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tab-btn-login">Sign In</button>
+                <button class="auth-tab-btn" id="tab-btn-register">Register New Account</button>
+              </div>
+
+              <!-- Login Form -->
+              <form id="form-login" class="auth-form">
+                <div class="form-group">
+                  <label for="login-email">College Email Address</label>
+                  <input type="email" id="login-email" class="form-control" required placeholder="e.g. student.alex@smartedu.edu">
+                </div>
+                <div class="form-group">
+                  <label for="login-password">Password</label>
+                  <input type="password" id="login-password" class="form-control" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="btn-login-submit">Sign In to Dashboard</button>
+              </form>
+
+              <!-- Registration Form -->
+              <form id="form-register" class="auth-form hidden">
+                <div class="form-group">
+                  <label for="reg-fullname">Full Name</label>
+                  <input type="text" id="reg-fullname" class="form-control" required placeholder="e.g. Sarah Jenkins">
+                </div>
+                <div class="form-group">
+                  <label for="reg-email">College Email</label>
+                  <input type="email" id="reg-email" class="form-control" required placeholder="e.g. s.jenkins@smartedu.edu">
+                </div>
+                <div class="form-group">
+                  <label for="reg-password">Password</label>
+                  <input type="password" id="reg-password" class="form-control" required placeholder="At least 6 characters">
+                </div>
+                <div class="form-row">
+                  <div class="form-group half">
+                    <label for="reg-role">Account Role</label>
+                    <select id="reg-role" class="form-control">
+                      <option value="student">Student</option>
+                      <option value="teacher">Teacher / Faculty</option>
+                    </select>
+                  </div>
+                  <div class="form-group half" id="reg-sem-group">
+                    <label for="reg-semester">Semester</label>
+                    <select id="reg-semester" class="form-control">
+                      <option value="1">Semester 1</option>
+                      <option value="2">Semester 2</option>
+                      <option value="3">Semester 3</option>
+                      <option value="4" selected>Semester 4</option>
+                      <option value="5">Semester 5</option>
+                      <option value="6">Semester 6</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="reg-department">Academic Department</label>
+                  <input type="text" id="reg-department" class="form-control" value="Computer Science & Engineering">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create SmartEdu Account</button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: STUDENT DASHBOARD                                         -->
+        <!-- ============================================================== -->
+        <section class="view-panel" id="view-dashboard">
+          <div class="dashboard-hero">
+            <div class="hero-text">
+              <h1 class="hero-title">Welcome back, <span id="hero-user-name">Student</span> 👋</h1>
+              <p class="hero-subtitle" id="hero-academic-meta">Computer Science & Engineering • Semester 4 • Academic Year 2026-2027</p>
+            </div>
+            <div class="hero-actions">
+              <button class="btn btn-primary" id="btn-hero-resume">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Continue Learning
+              </button>
+            </div>
+          </div>
+
+          <!-- Continue Learning Resume Card -->
+          <div class="resume-card" id="resume-card-box">
+            <div class="resume-badge">LAST ACCESSED TOPIC</div>
+            <div class="resume-content">
+              <div class="resume-title" id="resume-topic-title">Recursion, Backtracking & Memoization</div>
+              <div class="resume-sub" id="resume-course-title">CS401: Data Structures & Algorithms • Unit 2: Trees & Hierarchical Structures</div>
+            </div>
+            <button class="btn btn-sm btn-outline-primary" id="btn-jump-topic">Open Lesson Notes</button>
+          </div>
+
+          <!-- Metric Cards Grid -->
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-icon bg-blue">📚</div>
+              <div class="metric-info">
+                <div class="metric-val" id="metric-enrolled-count">2</div>
+                <div class="metric-label">Enrolled Subjects</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon bg-purple">⏱️</div>
+              <div class="metric-info">
+                <div class="metric-val" id="metric-study-time">4.2 hrs</div>
+                <div class="metric-label">Study Duration</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon bg-green">🎯</div>
+              <div class="metric-info">
+                <div class="metric-val" id="metric-quiz-avg">82.5%</div>
+                <div class="metric-label">Average Quiz Score</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon bg-amber">⚡</div>
+              <div class="metric-info">
+                <div class="metric-val" id="metric-coding-success">85.7%</div>
+                <div class="metric-label">Code Success Rate</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weakness Detection Highlight Banner -->
+          <div class="weakness-alert-banner" id="dashboard-weakness-banner">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-body">
+              <div class="alert-title">AI Student Weakness Detection Report</div>
+              <div class="alert-desc" id="dashboard-weakness-desc">Analyzing recent quiz scores, compiler runtime errors, and study times...</div>
+            </div>
+            <button class="btn btn-sm btn-secondary" id="btn-view-weakness-details">View Full Diagnosis</button>
+          </div>
+
+          <!-- Enrolled Courses Grid -->
+          <div class="section-header">
+            <h2 class="section-title">My Enrolled Subjects</h2>
+            <span class="section-hint">Syllabus-guided learning and practice</span>
+          </div>
+          <div class="cards-grid" id="enrolled-subjects-grid">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <!-- =========================================================== -->
+          <!-- AI-POWERED LEARNING & SOFTWARE ENGINEERING SECTION           -->
+          <!-- =========================================================== -->
+          <div class="section-header" style="margin-top: 32px;">
+            <h2 class="section-title">🤖 AI-Powered Learning &amp; Software Engineering</h2>
+            <span class="section-hint">Four intelligent tools to accelerate your coding and learning journey</span>
+          </div>
+
+          <div class="copilot-suite-grid" id="copilot-suite-grid">
+
+            <!-- Card 1: AI Code Generator -->
+            <div class="copilot-card" onclick="switchView('generator')">
+              <div class="copilot-card-icon" style="background: linear-gradient(135deg,#2563eb,#7c3aed)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="copilot-icon-svg"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div class="copilot-card-body">
+                <div class="copilot-card-title">AI Code Generator</div>
+                <div class="copilot-card-desc">Describe a programming requirement and get production-ready source code in Python, C++, Java, or JavaScript instantly.</div>
+                <div class="copilot-status-row">
+                  <span class="status-dot status-green"></span>
+                  <span class="status-label">Working — Local Heuristic Engine</span>
+                </div>
+              </div>
+              <button class="btn btn-primary copilot-action-btn">Generate Code →</button>
+            </div>
+
+            <!-- Card 2: Automated Testing -->
+            <div class="copilot-card" onclick="switchView('testing')">
+              <div class="copilot-card-icon" style="background: linear-gradient(135deg,#059669,#2563eb)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="copilot-icon-svg"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </div>
+              <div class="copilot-card-body">
+                <div class="copilot-card-title">Automated Test Suite</div>
+                <div class="copilot-card-desc">Paste your code and AI generates edge-case test scenarios. Tests execute in an isolated sandbox and show passed, failed, and error counts.</div>
+                <div class="copilot-status-row">
+                  <span class="status-dot status-green"></span>
+                  <span class="status-label">Working — Sandboxed Execution</span>
+                </div>
+              </div>
+              <button class="btn btn-primary copilot-action-btn">Run Tests →</button>
+            </div>
+
+            <!-- Card 3: AI Code Reviewer -->
+            <div class="copilot-card" onclick="switchView('review')">
+              <div class="copilot-card-icon" style="background: linear-gradient(135deg,#d97706,#dc2626)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="copilot-icon-svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+              </div>
+              <div class="copilot-card-body">
+                <div class="copilot-card-title">AI Code Reviewer</div>
+                <div class="copilot-card-desc">Multi-dimensional static analysis detects security vulnerabilities, bug hazards, complexity violations, and maintainability issues with actionable fixes.</div>
+                <div class="copilot-status-row">
+                  <span class="status-dot status-green"></span>
+                  <span class="status-label">Working — Multi-language Auditor</span>
+                </div>
+              </div>
+              <button class="btn btn-primary copilot-action-btn">Audit Code →</button>
+            </div>
+
+            <!-- Card 4: GitHub Assistant -->
+            <div class="copilot-card" onclick="switchView('github')">
+              <div class="copilot-card-icon" style="background: linear-gradient(135deg,#1f2937,#374151)">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="copilot-icon-svg"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.69c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85.004 1.7.115 2.5.336 1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>
+              </div>
+              <div class="copilot-card-body">
+                <div class="copilot-card-title">GitHub Repository Assistant</div>
+                <div class="copilot-card-desc">Connect to any public GitHub repository. Inspect file structure, analyse code quality, review pull request diffs, and get AI-powered codebase insights.</div>
+                <div class="copilot-status-row">
+                  <span class="status-dot status-green"></span>
+                  <span class="status-label">Working — Public Repos via GitHub API</span>
+                </div>
+              </div>
+              <button class="btn btn-primary copilot-action-btn">Inspect Repo →</button>
+            </div>
+
+          </div>
+
+          <!-- Secondary Feature Highlights Row -->
+          <div class="section-header" style="margin-top:28px;">
+            <h2 class="section-title">🎓 Core Learning Platform Features</h2>
+            <span class="section-hint">Your complete study environment</span>
+          </div>
+          <div class="feature-highlights-row">
+            <div class="feature-pill" onclick="switchView('coding')">
+              <span class="feature-pill-icon">💻</span>
+              <span>Coding Workspace</span>
+            </div>
+            <div class="feature-pill" onclick="switchView('ai-tutor')">
+              <span class="feature-pill-icon">🤖</span>
+              <span>AI Learning Tutor</span>
+            </div>
+            <div class="feature-pill" onclick="switchView('analytics')">
+              <span class="feature-pill-icon">📊</span>
+              <span>Performance &amp; Regression</span>
+            </div>
+            <div class="feature-pill" onclick="switchView('syllabus')">
+              <span class="feature-pill-icon">📚</span>
+              <span>Syllabus &amp; Notes</span>
+            </div>
+            <div class="feature-pill" onclick="switchView('quizzes')">
+              <span class="feature-pill-icon">🎯</span>
+              <span>Quizzes &amp; Tests</span>
+            </div>
+            <div class="feature-pill" onclick="switchView('assignments')">
+              <span class="feature-pill-icon">📝</span>
+              <span>Assignments</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: SYLLABUS & LEARNING SYSTEM                               -->
+        <!-- ============================================================== -->
+        <section class="view-panel hidden" id="view-syllabus">
+          <div class="syllabus-layout">
+            <!-- Left syllabus tree explorer -->
+            <div class="syllabus-sidebar">
+              <div class="syllabus-nav-header">
+                <div class="form-group no-margin">
+                  <label for="select-subject-syllabus">Active Subject:</label>
+                  <select id="select-subject-syllabus" class="form-control">
+                    <!-- Populated dynamically -->
+                  </select>
+                </div>
+                <div class="syllabus-progress-pill">
+                  <span class="prog-text">Progress:</span>
+                  <span class="prog-val" id="syllabus-completion-pct">0%</span>
+                </div>
+              </div>
+
+              <div class="syllabus-tree-container" id="syllabus-tree-container">
+                <div class="loading-state">Loading syllabus hierarchy...</div>
+              </div>
+            </div>
+
+            <!-- Right: Topic Study Material & Notes Reader -->
+            <div class="topic-content-pane">
+              <div class="topic-header-bar">
+                <div class="topic-header-info">
+                  <div class="topic-breadcrumb" id="topic-breadcrumb">Select a topic from the left</div>
+                  <h2 class="topic-display-title" id="topic-display-title">Choose a Topic to Start Learning</h2>
+                </div>
+                <div class="topic-actions">
+                  <button class="btn btn-sm btn-outline-primary" id="btn-topic-ai-hint">
+                    🤖 Ask AI Tutor
+                  </button>
+                  <button class="btn btn-sm btn-primary" id="btn-mark-topic-complete">
+                    ✓ Mark as Completed
+                  </button>
+                </div>
+              </div>
+
+              <!-- Objectives Card -->
+              <div class="learning-objectives-box" id="topic-objectives-box">
+                <div class="obj-title">🎯 Learning Objectives:</div>
+                <div class="obj-content" id="topic-objectives-text">Select a topic to view objectives.</div>
+              </div>
+
+              <!-- Study Content Viewer (Markdown/Notes) -->
+              <div class="study-content-reader" id="topic-study-content">
+                <p class="placeholder-text">Click on any syllabus topic in the left hierarchy tree to study course notes, code examples, and theoretical foundations.</p>
+              </div>
+
+              <div class="topic-footer-bar">
+                <button class="btn btn-secondary" id="btn-topic-practice-code">
+                  💻 Practice in Coding Platform
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: PERSONAL CODING PLATFORM                                  -->
+        <!-- ============================================================== -->
+        <section class="view-panel hidden" id="view-coding">
+          <div class="ide-workspace">
+            <!-- IDE Toolbar -->
+            <div class="ide-toolbar">
+              <div class="ide-tool-group">
+                <label for="select-code-lang">Language:</label>
+                <select id="select-code-lang" class="form-control ide-select">
+                  <option value="Python" selected>Python (3.8.1 / 3.11)</option>
+                  <option value="C">C (GCC 9.2.0)</option>
+                  <option value="C++">C++ (GCC 9.2.0)</option>
+                  <option value="Java">Java (OpenJDK 13.0.1)</option>
+                  <option value="JavaScript">JavaScript (Node.js)</option>
+                  <option value="C#">C# (Mono 6.6)</option>
+                  <option value="PHP">PHP (7.4)</option>
+                  <option value="Go">Go (1.13)</option>
+                  <option value="Rust">Rust (1.40)</option>
+                </select>
+              </div>
+
+              <div class="ide-tool-group">
+                <button class="btn btn-secondary btn-sm" id="btn-save-snippet">💾 Save Snippet</button>
+                <button class="btn btn-secondary btn-sm" id="btn-download-code">⬇ Download</button>
+                <button class="btn btn-secondary btn-sm" id="btn-clear-code">Clear</button>
+                <button class="btn btn-primary btn-sm" id="btn-run-code">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="btn-svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Run Code
+                </button>
+              </div>
+            </div>
+
+            <!-- IDE Main Split -->
+            <div class="ide-split-container">
+              <!-- Left: Code Editor -->
+              <div class="ide-editor-container">
+                <div class="pane-tab">Source Code Editor</div>
+                <textarea id="code-editor" class="code-textarea" spellcheck="false"># Write your solution here
+def solve_problem():
+    print("Welcome to SmartEdu Coding Platform!")
+    # Example input/output test
+    return True
+
+if __name__ == "__main__":
+    solve_problem()
+</textarea>
+              </div>
+
+              <!-- Right: Custom Input & Output Terminals -->
+              <div class="ide-output-container">
+                <!-- Custom Input -->
+                <div class="io-pane">
+                  <div class="pane-tab">Custom Standard Input (stdin)</div>
+                  <textarea id="custom-input-box" class="io-textarea" placeholder="Enter custom inputs provided to your program..."></textarea>
+                </div>
+
+                <!-- Execution Telemetry Badge -->
+                <div class="execution-telemetry-bar" id="exec-telemetry-bar">
+                  <span class="telemetry-item" id="telemetry-status">Status: Ready</span>
+                  <span class="telemetry-item" id="telemetry-time">Time: -</span>
+                  <span class="telemetry-item" id="telemetry-memory">Memory: -</span>
+                  <span class="telemetry-item" id="telemetry-provider">Engine: Judge0</span>
+                </div>
+
+                <!-- Program Standard Output Console -->
+                <div class="io-pane flex-grow">
+                  <div class="pane-tab">Standard Output (stdout)</div>
+                  <pre class="terminal-output" id="stdout-console">Output will appear here after clicking 'Run Code'...</pre>
+                </div>
+
+                <!-- Compilation & Runtime Error Panels -->
+                <div class="error-panel-drawer hidden" id="error-panel-drawer">
+                  <div class="error-panel-header" id="error-panel-header">Compilation / Runtime Error</div>
+                  <pre class="error-output" id="error-output-console"></pre>
+                  <button class="btn btn-sm btn-outline-danger" id="btn-debug-with-ai">🤖 Ask AI Tutor to Explain This Error</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submission Audit History Table -->
+            <div class="submission-history-box">
+              <div class="section-header">
+                <h3 class="section-title">Recent Code Submissions & Execution Log</h3>
+              </div>
+              <div class="table-responsive">
+                <table class="data-table" id="code-submissions-table">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Language</th>
+                      <th>Status</th>
+                      <th>Exec Time</th>
+                      <th>Memory</th>
+                      <th>Provider</th>
+                    </tr>
+                  </thead>
+                  <tbody id="code-submissions-body">
+                    <tr><td colspan="6" class="text-center">No submissions yet</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: AI Socratic Learning Assistant                            -->
+        <!-- ============================================================== -->
+        <section class="view-panel hidden" id="view-ai-tutor">
+          <div class="ai-tutor-layout">
+            <div class="tutor-header-card">
+              <div class="tutor-avatar-icon">🤖</div>
+              <div class="tutor-header-meta">
+                <h2 class="tutor-name">SmartEdu Socratic AI Tutor</h2>
+                <p class="tutor-desc">Personalized AI Mentor that guides your problem-solving step-by-step using pedagogical hints instead of giving raw answers.</p>
+              </div>
+            </div>
+
+            <div class="tutor-modes-bar">
+              <button class="tutor-mode-chip active" data-mode="concept">🎓 Conceptual Breakdown</button>
+              <button class="tutor-mode-chip" data-mode="hint">💡 Socratic Hint</button>
+              <button class="tutor-mode-chip" data-mode="error_debug">🔍 Error Debugger</button>
+              <button class="tutor-mode-chip" data-mode="practice">📝 Practice Question</button>
+            </div>
+
+            <div class="chat-messages-container" id="ai-chat-messages">
+              <div class="chat-bubble ai-bubble">
+                <div class="bubble-sender">AI Tutor</div>
+                <div class="bubble-body">
+                  Hello! I am your personalized Computer Science tutor. Whether you're working on Dynamic Arrays, Tree Traversals, or stuck on a compilation bug, ask me below and I'll break it down step-by-step!
+                </div>
+              </div>
+            </div>
+
+            <!-- Chat Input Box -->
+            <form id="ai-chat-form" class="chat-input-bar">
+              <textarea id="ai-chat-input" class="chat-input" rows="2" placeholder="Ask a question about your subject, code, or error..."></textarea>
+              <button type="submit" class="btn btn-primary chat-send-btn" id="btn-send-ai">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                Send
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: QUIZZES & ASSESSMENTS                                     -->
+        <!-- ============================================================== -->
+        <section class="view-panel hidden" id="view-quizzes">
+          <div class="section-header">
+            <h2 class="section-title">Topic Quizzes & Self-Assessments</h2>
+            <span class="section-hint">Test your understanding with instant automated feedback</span>
+          </div>
+
+          <div class="cards-grid" id="quizzes-grid">
+            <!-- Quizzes populated dynamically -->
+          </div>
+
+          <!-- Active Quiz Taking Modal/Area -->
+          <div class="quiz-player-container hidden" id="quiz-player-container">
+            <div class="quiz-player-header">
+              <div>
+                <h2 class="quiz-player-title" id="player-quiz-title">Quiz Title</h2>
+                <div class="quiz-player-meta" id="player-quiz-meta">Total Marks: 20 • Time: 15 mins</div>
+              </div>
+              <div class="quiz-timer-pill" id="quiz-timer-pill">Time Remaining: <span id="quiz-time-display">15:00</span></div>
+            </div>
+
+            <form id="quiz-submission-form">
+              <div class="quiz-questions-list" id="quiz-questions-list">
+                <!-- Questions rendered dynamically -->
+              </div>
+              <div class="quiz-player-footer">
+                <button type="button" class="btn btn-secondary" id="btn-cancel-quiz">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="btn-submit-quiz">Submit Answers for Grading</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Quiz Results Review Drawer -->
+          <div class="quiz-results-container hidden" id="quiz-results-container">
+            <div class="results-score-banner" id="results-score-banner">
+              <div class="score-display">Your Score: <span id="res-score-val">0</span> / <span id="res-max-val">0</span> (<span id="res-pct-val">0%</span>)</div>
+              <p class="score-feedback" id="res-feedback-text">Review your answers and explanations below.</p>
+            </div>
+            <div class="results-review-list" id="results-review-list"></div>
+            <button class="btn btn-secondary" id="btn-close-results">Back to Quizzes</button>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: ASSIGNMENTS                                              -->
+        <!-- ============================================================== -->
+        <section class="view-panel hidden" id="view-assignments">
+          <div class="section-header">
+            <h2 class="section-title">Course Assignments</h2>
+            <span class="section-hint">Submit code implementations and lab exercises</span>
+          </div>
+
+          <div class="cards-grid" id="assignments-grid">
+            <!-- Assignments populated dynamically -->
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: PERFORMANCE ANALYTICS & REGRESSION (10 GRAPHS)            -->
+        <!-- ============================================================== -->
+        <section class="view-panel hidden" id="view-analytics">
+          <div class="analytics-header-card">
+            <div>
+              <h1 class="section-title">Academic Telemetry & Machine Learning Regression</h1>
+              <p class="section-hint">Statistical modeling of student study habits, coding metrics, and performance trajectory using Scikit-Learn.</p>
+            </div>
+          </div>
+
+          <!-- Regression Analysis Spotlight Box -->
+          <div class="regression-spotlight-card">
+            <div class="spotlight-header">
+              <div class="spotlight-title">🤖 Scikit-Learn Linear Regression Model: Future Performance Predictor</div>
+              <span class="badge badge-primary" id="reg-status-badge">Model Active</span>
+            </div>
+            
+            <div class="metrics-grid small-margin">
+              <div class="metric-card">
+                <div class="metric-val text-blue" id="reg-r2-val">0.85</div>
+                <div class="metric-label">R² Coefficient of Determination</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-val text-purple" id="reg-mae-val">3.2%</div>
+                <div class="metric-label">Mean Absolute Error (MAE)</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-val text-green" id="reg-rmse-val">4.1%</div>
+                <div class="metric-label">Root Mean Squared Error (RMSE)</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-val" id="reg-samples-val">5</div>
+                <div class="metric-label">Training Data Checkpoints</div>
+              </div>
+            </div>
+
+            <!-- Regression Chart -->
+            <div class="chart-container-large">
+              <canvas id="chart-regression-plot"></canvas>
+            </div>
+            <div class="regression-disclaimer" id="regression-disclaimer-text">
+              * Note: Regression predictions are statistical estimates computed via Scikit-Learn based on historical study hours, quiz trends, and code success rates. Not a guaranteed outcome.
+            </div>
+          </div>
+
+          <!-- 9 Additional Performance Graphs Grid -->
+          <div class="charts-2col-grid">
+            <!-- 1. Performance Over Time -->
+            <div class="chart-box">
+              <h3 class="chart-box-title">1. Student Performance Over Time</h3>
+              <div class="canvas-wrapper"><canvas id="chart-performance-over-time"></canvas></div>
+            </div>
+
+            <!-- 2. Weekly Study Time -->
+            <div class="chart-box">
+              <h3 class="chart-box-title">2. Weekly Study Duration (Hours)</h3>
+              <div class="canvas-wrapper"><canvas id="chart-weekly-study-time"></canvas></div>
+            </div>
+
+            <!-- 3. Subject-wise Comparison -->
+            <div class="chart-box">
+              <h3 class="chart-box-title">3. Subject-wise Performance Comparison</h3>
+              <div class="canvas-wrapper"><canvas id="chart-subject-comparison"></canvas></div>
+            </div>
+
+            <!-- 4. Unit-wise Marks -->
+            <div class="chart-box">
+              <h3 class="chart-box-title">4. Unit-wise Average Marks</h3>
+              <div class="canvas-wrapper"><canvas id="chart-unit-marks"></canvas></div>
+            </div>
+
+            <!-- 5. Topic-wise Weakness Analysis -->
+            <div class="chart-box">
+              <h3 class="chart-box-title">5. Concept Weakness Struggle Distribution</h3>
+              <div class="canvas-wrapper"><canvas id="chart-weakness-distribution"></canvas></div>
+            </div>
+
+            <!-- 6. Coding Success vs Failure -->
+            <div class="chart-box">
+              <h3 class="chart-box-title">6. Coding Executions: Success vs Errors</h3>
+              <div class="canvas-wrapper"><canvas id="chart-coding-ratio"></canvas></div>
+            </div>
+
+            <!-- 7. Quiz Performance Trends -->
+            <div class="chart-box">
+              <h3 class="chart-box-title">7. Quiz Assessment Trends</h3>
+              <div class="canvas-wrapper"><canvas id="chart-quiz-trends"></canvas></div>
+            </div>
+
+            <!-- 8. Syllabus Completion Percentage -->
+            <div class="chart-box">
+              <h3 class="chart-box-title">8. Syllabus Completion Status</h3>
+              <div class="canvas-wrapper"><canvas id="chart-completion-gauge"></canvas></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: FACULTY / TEACHER DASHBOARD                               -->
+        <!-- ============================================================== -->
+        <section class="view-panel hidden" id="view-teacher-dashboard">
+          <div class="section-header">
+            <h1 class="section-title">Faculty Course & Student Monitoring Portal</h1>
+            <span class="section-hint">Oversee student progress, diagnose learning bottlenecks, and manage courses</span>
+          </div>
+
+          <!-- Students Needing Attention Alert Section -->
+          <div class="attention-section">
+            <h3 class="attention-heading">⚠️ Students Flagged for Academic Attention (High Struggle Score)</h3>
+            <div class="attention-list" id="teacher-attention-list">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Class-wide Student Roster -->
+          <div class="section-header small-margin">
+            <h3 class="section-title">Enrolled Student Performance Roster</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="teacher-roster-table">
+              <thead>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Email</th>
+                  <th>Department</th>
+                  <th>Semester</th>
+                  <th>Completed Topics</th>
+                  <th>Quizzes Taken</th>
+                  <th>Attention Status</th>
+                </tr>
+              </thead>
+              <tbody id="teacher-roster-body">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: FACULTY SYLLABUS BUILDER                                 -->
+        <!-- ============================================================== -->
+        <section class="view-panel hidden" id="view-syllabus-builder">
+          <div class="section-header">
+            <h1 class="section-title">Syllabus & Course Manager</h1>
+            <span class="section-hint">Create subjects, units, chapters, and topics with learning objectives and study notes</span>
+          </div>
+
+          <div class="builder-grid">
+            <!-- Add Subject Form -->
+            <div class="builder-card">
+              <h3 class="builder-card-title">Create New Subject</h3>
+              <form id="form-create-subject">
+                <div class="form-group">
+                  <label>Subject Code</label>
+                  <input type="text" id="b-sub-code" class="form-control" placeholder="e.g. CS405" required>
+                </div>
+                <div class="form-group">
+                  <label>Subject Title</label>
+                  <input type="text" id="b-sub-title" class="form-control" placeholder="e.g. Operating Systems" required>
+                </div>
+                <div class="form-row">
+                  <div class="form-group half">
+                    <label>Semester</label>
+                    <input type="number" id="b-sub-sem" class="form-control" value="4" min="1" max="10" required>
+                  </div>
+                  <div class="form-group half">
+                    <label>Department</label>
+                    <input type="text" id="b-sub-dept" class="form-control" value="Computer Science & Engineering" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea id="b-sub-desc" class="form-control" rows="2" placeholder="Course syllabus overview..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Add Subject</button>
+              </form>
+            </div>
+
+            <!-- Add Unit & Topic Form -->
+            <div class="builder-card">
+              <h3 class="builder-card-title">Add Unit to Subject</h3>
+              <form id="form-create-unit">
+                <div class="form-group">
+                  <label>Target Subject</label>
+                  <select id="b-target-subject" class="form-control" required></select>
+                </div>
+                <div class="form-row">
+                  <div class="form-group half">
+                    <label>Unit Number</label>
+                    <input type="number" id="b-unit-num" class="form-control" value="1" min="1" required>
+                  </div>
+                  <div class="form-group half">
+                    <label>Unit Title</label>
+                    <input type="text" id="b-unit-title" class="form-control" placeholder="e.g. Unit 3: Graph Algorithms" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea id="b-unit-desc" class="form-control" rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn btn-secondary btn-block">Add Unit</button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: DEVELOPER SUITE (LEGACY COPILOT MODULES)                 -->
+        <!-- ============================================================== -->
+        <!-- Code Generator -->
+        <section class="view-panel hidden" id="view-generator">
+          <div class="panel-header">
+            <h1 class="panel-title">AI Code Generator</h1>
+            <p class="panel-subtitle">Synthesize clean, idiomatic algorithms and starter templates across Python, C++, Java, and JavaScript.</p>
+          </div>
+          <div class="form-card">
+            <form id="form-generate">
+              <div class="form-row">
+                <div class="form-group flex-2">
+                  <label for="gen-prompt">Programming Requirement</label>
+                  <textarea id="gen-prompt" class="form-control" rows="3" placeholder="e.g. Implement an LRU Cache with O(1) get and put operations..."></textarea>
+                </div>
+                <div class="form-group flex-1">
+                  <label for="gen-lang">Target Language</label>
+                  <select id="gen-lang" class="form-control">
+                    <option value="Python" selected>Python</option>
+                    <option value="C++">C++</option>
+                    <option value="Java">Java</option>
+                    <option value="JavaScript">JavaScript</option>
+                  </select>
+                  <label for="gen-style" style="margin-top:10px;">Architecture Style</label>
+                  <select id="gen-style" class="form-control">
+                    <option value="standard" selected>Standard</option>
+                    <option value="oop">Object-Oriented</option>
+                    <option value="microservice">Microservice</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary" id="btn-submit-generate">Synthesize Code</button>
+            </form>
+          </div>
+          <div class="result-box hidden" id="gen-result-box">
+            <div class="result-header">
+              <span class="result-title">Generated Output</span>
+              <button class="btn btn-sm btn-secondary" id="btn-copy-gen">Copy Code</button>
+            </div>
+            <pre class="code-block" id="gen-output-code"></pre>
+          </div>
+        </section>
+
+        <!-- Code Reviewer -->
+        <section class="view-panel hidden" id="view-review">
+          <div class="panel-header">
+            <h1 class="panel-title">AI Code Reviewer & Static Auditor</h1>
+            <p class="panel-subtitle">Multi-dimensional static analysis checking security vulnerabilities, bug hazards, complexity, and maintainability.</p>
+          </div>
+          <div class="form-card">
+            <form id="form-review">
+              <div class="form-group">
+                <label for="rev-code">Paste Code for Review</label>
+                <textarea id="rev-code" class="form-control code-textarea" rows="8" placeholder="Paste source code to audit..."></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group half">
+                  <label for="rev-lang">Language</label>
+                  <select id="rev-lang" class="form-control">
+                    <option value="Python">Python</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="C++">C++</option>
+                    <option value="Java">Java</option>
+                  </select>
+                </div>
+                <div class="form-group half align-end">
+                  <button type="submit" class="btn btn-primary btn-block">Audit Code</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="result-box hidden" id="rev-result-box">
+            <div class="review-score-banner" id="rev-score-banner"></div>
+            <div class="findings-list" id="rev-findings-list"></div>
+          </div>
+        </section>
+
+        <!-- Audit History -->
+        <section class="view-panel hidden" id="view-history">
+          <div class="panel-header">
+            <h1 class="panel-title">System Audit & Task History</h1>
+            <p class="panel-subtitle">Persistent SQLite audit log of past generation, reviews, and executions.</p>
+          </div>
+          <div class="history-list" id="history-items-container"></div>
+        </section>
+
+        <!-- VIEW: AUTOMATED TESTING SUITE -->
+        <section class="view-panel hidden" id="view-testing">
+          <div class="panel-header">
+            <h1 class="panel-title">Automated Test Suite Generator &amp; Runner</h1>
+            <p class="panel-subtitle">AI generates test cases from your code, then executes them in an isolated Python sandbox. See passed, failed, and runtime error counts.</p>
+          </div>
+          <div class="form-card">
+            <form id="form-test-generate">
+              <div class="form-group">
+                <label for="test-source-code">Source Code to Test</label>
+                <textarea id="test-source-code" class="form-control code-textarea" rows="8" placeholder="Paste the function or class you want to test here..."></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group half">
+                  <label for="test-lang">Language</label>
+                  <select id="test-lang" class="form-control">
+                    <option value="Python" selected>Python</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="C++">C++</option>
+                    <option value="Java">Java</option>
+                  </select>
+                </div>
+                <div class="form-group half align-end">
+                  <button type="submit" class="btn btn-primary btn-block" id="btn-generate-tests">Generate &amp; Run Tests</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="result-box hidden" id="test-result-box">
+            <div class="test-summary-bar" id="test-summary-bar">
+              <span class="test-metric passed">Passed: <span id="test-passed-count">0</span></span>
+              <span class="test-metric failed">Failed: <span id="test-failed-count">0</span></span>
+              <span class="test-metric errored">Errors: <span id="test-error-count">0</span></span>
+              <span class="test-metric total">Total: <span id="test-total-count">0</span></span>
+            </div>
+            <div class="findings-list" id="test-cases-list"></div>
+          </div>
+        </section>
+
+        <!-- VIEW: GITHUB REPOSITORY ASSISTANT -->
+        <section class="view-panel hidden" id="view-github">
+          <div class="panel-header">
+            <h1 class="panel-title">GitHub Repository Assistant</h1>
+            <p class="panel-subtitle">Inspect public GitHub repositories - explore file trees, analyse code quality, and get AI codebase insights. Read-only. Never modifies or merges code.</p>
+          </div>
+          <div class="form-card">
+            <form id="form-github-inspect">
+              <div class="form-row">
+                <div class="form-group flex-2">
+                  <label for="github-repo-url">GitHub Repository URL</label>
+                  <input type="url" id="github-repo-url" class="form-control" placeholder="https://github.com/owner/repository">
+                </div>
+                <div class="form-group flex-1 align-end">
+                  <button type="submit" class="btn btn-primary btn-block" id="btn-github-inspect">Inspect Repository</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="result-box hidden" id="github-result-box">
+            <div class="github-repo-meta" id="github-repo-meta"></div>
+            <div class="result-header" style="margin-top:16px;">
+              <span class="result-title">Repository File Structure</span>
+            </div>
+            <div class="findings-list" id="github-file-tree"></div>
+            <div class="result-header" style="margin-top:12px;">
+              <span class="result-title">AI Analysis &amp; Code Quality Report</span>
+            </div>
+            <div class="findings-list" id="github-analysis-list"></div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
